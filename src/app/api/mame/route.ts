@@ -4,11 +4,10 @@ import { createClient } from '@supabase/supabase-js'
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-// Supabase côté serveur avec la clé service (si disponible) ou anon
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Supabase côté serveur
+const supabaseUrl = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
+const supabaseKey = process.env.SUPABASE_ANON_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 const SYSTEM_PROMPT = `Tu es Mame, l'assistant IA officiel de GESLOC — le système de gestion des dossiers du Ministère de la Justice du Sénégal.
 
